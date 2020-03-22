@@ -3,8 +3,19 @@ $font_size_18: 18;
 $font_size_14: 14;
 $font_size_h2: 30;
 $font_size_h4: 18;
+$font_color_blog_1: #8e8e8e;
+$font_color_blog_2: #151515;
 
 .font_color {
   color: $font_color;
 }
-
+.base_personal_container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 60px 0 60px 0;
+  hr{
+    width: 60px;
+    border: solid 2px $font_color;
+  }
+}

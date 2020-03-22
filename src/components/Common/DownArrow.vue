@@ -28,6 +28,8 @@ export default {
     align-items: center;
     width: 60px;
     height: 60px;
+    position: relative;
+    z-index: 1;
     i{
         transform: rotate(90deg);
         font-size: 25px;

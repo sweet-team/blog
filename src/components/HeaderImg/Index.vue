@@ -1,7 +1,8 @@
 <template>
     <div class="header_img_container" v-bind:style="maxWidth">
         <div class="header_img">
-            <img :src="headerImg" alt="">
+<!--            <img :src="headerImg" alt="">-->
+            <img src="../../assets/img/head.jpg" alt="">
         </div>
         <div class="header_img_circle">
             <div></div>
@@ -32,22 +33,23 @@ export default {
 <style lang="scss">
     .header_img_container{
         max-width: 220px;
+        position: relative;
     }
     .header_img_circle{
-        position: relative;
+        position: absolute;
         height: 110%;
         width: 110%;
-        top: -105%;
+        top: -5%;
         left: -5%;
-        border-left: red solid 3px;
-        border-right: red solid 3px;
+        border-left: red solid 1px;
+        border-right: red solid 1px;
         border-radius: 50%;
         animation:roteX 2s infinite;
         ::before{
             content: "";
             display: block;
             position: absolute;
-            border-top: green solid 3px;
+            border-top: green solid 1px;
             width: 110%;
             height: 110%;
             border-radius: 50%;
@@ -58,7 +60,7 @@ export default {
             content: "";
             display: block;
             position: absolute;
-            border-bottom: blue solid 3px;
+            border-bottom: blue solid 1px;
             width: 110%;
             height: 110%;
             border-radius: 50%;

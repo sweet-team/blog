@@ -50,6 +50,9 @@ export default {
     transition: all .8s;
 }
 .to_blog_container{
+    a{
+        color: white;
+    }
     :hover{
         color: $font_color;
     }
@@ -66,7 +69,7 @@ export default {
     }
     .header{
         position: fixed;
-        z-index: 1;
+        z-index: 3;
         .header_container{
             display: flex;
             flex-direction: row;

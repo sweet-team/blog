@@ -1,5 +1,5 @@
 <template>
-  <div class="personal">
+  <div >
     <Header ref="header" />
     <div class="index_in_person" v-bind:style="styleObject">
       <HeaderImg v-bind:header-img="aboutMe.proUrl" v-bind:max-container-width="'240px'" />
@@ -9,9 +9,24 @@
       </div>
       <DownArrow v-bind:to="this.$store.state.toPersonalUrl[0].url" />
     </div>
-
-    <div><button @click="test()">dsaads</button></div>
-
+    <div ref="baseInfoContainer" id="baseInfo">
+      <Base ref="baseInfo" />
+    </div>
+    <div id="skill">
+      <Skill v-bind:skills="skills"  />
+    </div>
+    <div id="experience" ref="experienceContainer">
+      <Experience v-bind:experience="experiences"  ref="experience"/>
+    </div>
+    <div id="selfEvaluation">
+      <SelfEvaluation v-bind:content="aboutMe.evaluation" />
+    </div>
+    <div id="contact">
+      <Contact v-bind:contact="{place:aboutMe.place,email:aboutMe.email,weChat:aboutMe.weChat}"/>
+    </div>
+    <div>
+      <Bottom />
+    </div>
   </div>
 </template>
 
@@ -19,12 +34,23 @@
 import Header from '../components/Personal/Header.vue'
 import HeaderImg from '../components/HeaderImg/Index.vue'
 import DownArrow from '../components/Common/DownArrow.vue'
+import Base from '../components/Personal/Base.vue'
+import Skill from '../components/Personal/Skill.vue'
+import Experience from '../components/Personal/Experience.vue'
+import SelfEvaluation from '../components/Personal/SelfEvaluation.vue'
+import Contact from '../components/Personal/Contact.vue'
+import Bottom from '../components/Bottom/Index.vue'
 export default {
   components:{
     Header,
     HeaderImg,
     DownArrow,
-
+    Base,
+    Skill,
+    Experience,
+    SelfEvaluation,
+    Contact,
+    Bottom,
   },
   mounted() {
     this.initInfo()
@@ -35,7 +61,11 @@ export default {
   data(){
     return{
       aboutMe: {},
-      scroll: '',
+      skills: [],
+      selfEvaluation: '',
+      experiences: [],
+
+      skillHeight: '',
       styleObject:{
         height: ''
       },
@@ -43,10 +73,17 @@ export default {
   },
   methods:{
     initInfo(){
-      this.$api.Personal.PersonalInfo().then(res => {
+      this.$api.Personal.info().then(res => {
         // console.log(res)
         this.aboutMe = res
         // console.log(this.aboutMe)
+      })
+      this.$api.Personal.skill().then(res => {
+        console.log(res)
+        this.skills = res
+      })
+      this.$api.Personal.experience().then(res => {
+        this.experiences = res
       })
     },
     handlerResize(){
@@ -58,11 +95,34 @@ export default {
     handleScroll(){
 
       this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
+      let height = document.documentElement.clientHeight || document.body.clientHeight ;
+      let bottomPosition = this.scroll+ height
       //滚动条滚动到对应的板块显示
       if(this.scroll < 50){
         this.$refs.header.changeAnimate(true);
       }else {
         this.$refs.header.changeAnimate(false);
+      }
+
+
+      let baseInfoContainerH = this.$refs.baseInfoContainer.offsetHeight
+      let baseInfoContainerOffsetTop= this.$refs.baseInfoContainer.offsetTop
+      let baseInfoI = baseInfoContainerOffsetTop+baseInfoContainerH/2
+
+      if (bottomPosition > baseInfoI && this.scroll < baseInfoI){
+        this.$refs.baseInfo.addChangeAnimate(true)
+      }else {
+        this.$refs.baseInfo.addChangeAnimate(false)
+      }
+
+      let experienceH = this.$refs.experienceContainer.offsetHeight
+      let experienceT  = this.$refs.experienceContainer.offsetTop
+      let experienceI = experienceT+ experienceH/3
+
+      if (bottomPosition > experienceI && this.scroll < experienceI){
+        this.$refs.experience.changeAnimation(true)
+      }else {
+        this.$refs.experience.changeAnimation(false)
       }
     },
   },
@@ -89,7 +149,4 @@ export default {
       margin-bottom: 50px;
     }
   }
-.personal{
-  height: 1900px;
-}
 </style>

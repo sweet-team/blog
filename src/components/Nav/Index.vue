@@ -1,7 +1,12 @@
 <template>
     <ul class="nav">
-        <li v-for="item in links" :key="item.url">
-            <router-link :to="item.url" >{{item.name}}</router-link>
+        <li v-for="item in links" v-bind:class="{active:item.url === activeUrl}" :key="item.url">
+            <ul class="children" v-if="item.children != undefined && item.children.length > 0 ">
+                <li v-for="temp in item.children" :key="temp.id">
+                    <router-link :to="item.url+'/'+temp.id">{{temp.name}}</router-link>
+                </li>
+            </ul>
+            <router-link :to="item.url" v-else>{{item.name}}</router-link>
         </li>
     </ul>
 </template>
@@ -11,7 +16,13 @@ export default {
   props:{
     links:{
       type: Array
+    },
+    activeUrl:{
+      type: String
     }
+  },
+  methods:{
+
   }
 }
 </script>
@@ -21,6 +32,9 @@ export default {
 .nav{
     display: block;
     margin: 0;
+    a{
+        color:white;
+    }
     li{
         display: inline-block;
         padding:0 15px;

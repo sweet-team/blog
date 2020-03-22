@@ -3,13 +3,22 @@ html,body{
   margin: 0;
   padding: 0;
 }
+p{
+  word-wrap:break-word;
+}
 a{
   text-decoration: none;
-  color: #fff;
+  color: $font_color_blog_1;
 }
 h2{
   font-size: $font_size_h2+px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #ddd;
 }
 h4{
   font-size: $font_size_h4+px;
+}
+b, strong{
+  font-weight: bold;
 }

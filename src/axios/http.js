@@ -88,7 +88,7 @@ export function get(url,params) {
       params: params
     }).then(res => {
       // console.log(res)
-      resolve(res.data);
+      resolve(res.data.data);
     }).catch(err => {
       reject(err.data)
     })
