@@ -6,13 +6,13 @@ Mock.mock("http://localhost/about",'get',{
     "data":{
         "name":"李学",
         "sex":"男",
-        "age":"24",
+        "age":839088000000,
         "place":"福州市闽侯县",
         "college":"闽江学院",
         "major":"计算机科学与技术",
         "direction":"网络信息安全",
         "motto":"生活苦乐相伴,爱情在月下花海",
-        "proUrl":'/img/head.cc5300ee.jpg',
+        "proUrl":Random.image("600x600","#894FC4","LX"),
         "collegeType":"大学本科",
         "email":"lixue_main@163.com",
         "weChat":"lx249875314",
@@ -27,7 +27,8 @@ Mock.mock("http://localhost/skill",'get',{
             "img": Random.image("600x600","#894FC4","LX"),
             "level": Random.integer(1,100),
             "platform": Random.string(5),
-            "intro": Random.cparagraph(3)
+            "intro": Random.cparagraph(3),
+            "show": Random.bool()
         }
     ]
 })
@@ -41,11 +42,11 @@ Mock.mock("http://localhost/experiences",'get',{
             "content":Random.cparagraph(3),
             "startTime": Random.datetime('yyyy-MM-dd'),
             "endTime": Random.datetime('yyyy-MM-dd'),
-
+            "show": Random.bool()
         }
     ]
 })
-//友情连接
+//友情连接 Site
 Mock.mock("http://localhost/links","get",{
     "data|1-10":[
         {
@@ -56,7 +57,7 @@ Mock.mock("http://localhost/links","get",{
 })
 // /blog  index    /blog/type   导航定位  /blog/type/1
 
-//blog/banner
+//blog/banner Site
 Mock.mock("http://localhost/banners","get",{
     "data|1-10":[
         {

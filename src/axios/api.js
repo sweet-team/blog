@@ -1,8 +1,23 @@
 import {get} from './http.js'
-
+let moment =  require('moment')
 const Personal = {
-  info(){
-      return get("/about")
+  info(type){
+    let t = get("/about")
+    if(type === 'blog'){
+      t.then(res => {
+        if(res.age){
+          res.age = moment().diff(moment(res.age),"years")
+        }
+      })
+    }else if(type === 'admin'){
+      t.then(res => {
+        if(res.age){
+          res.age = moment(res.age).format('YYYY-MM-DD')
+        }
+      })
+    }
+    return t
+
   },
   skill(){
     return get("/skill")

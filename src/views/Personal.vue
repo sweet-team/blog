@@ -73,7 +73,7 @@ export default {
   },
   methods:{
     initInfo(){
-      this.$api.Personal.info().then(res => {
+      this.$api.Personal.info('blog').then(res => {
         // console.log(res)
         this.aboutMe = res
         // console.log(this.aboutMe)
